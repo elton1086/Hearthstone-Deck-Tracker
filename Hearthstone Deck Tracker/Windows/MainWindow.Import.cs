@@ -353,7 +353,7 @@ namespace Hearthstone_Deck_Tracker.Windows
 				if(choice.Value == ImportingChoice.SaveLocal)
 					SaveImportedDeck(deck);
 				else
-					ExportDeck(deck);
+					ShowExportFlyout(deck);
 			}
 		}
 	}

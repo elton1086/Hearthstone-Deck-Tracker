@@ -11,6 +11,7 @@
                       xmlns:utility="clr-namespace:Hearthstone_Deck_Tracker.Utility.Updating"
                       xmlns:lex="http://wpflocalizeextension.codeplex.com"
                       xmlns:deckScreenshot="clr-namespace:Hearthstone_Deck_Tracker.FlyoutControls.DeckScreenshot"
+                      xmlns:deckExport="clr-namespace:Hearthstone_Deck_Tracker.FlyoutControls.DeckExport"
                       xmlns:mainWindowControls="clr-namespace:Hearthstone_Deck_Tracker.Windows.MainWindowControls"
                       xmlns:deckHistory="clr-namespace:Hearthstone_Deck_Tracker.FlyoutControls.DeckHistory"
                       lex:LocalizeDictionary.DesignCulture="en"
@@ -131,6 +132,9 @@
             <controls:Flyout x:Name="FlyoutDeckScreenshot" Header="{lex:Loc MainWindow_Flyout_DeckScreenshot_Header}" Position="Right" Panel.ZIndex="1" Width="300">
                 <deckScreenshot:DeckScreenshotView x:Name="DeckScreenshotFlyout"/>
             </controls:Flyout>
+            <controls:Flyout x:Name="FlyoutDeckExport" Header="Export" Position="Right" Panel.ZIndex="1" Width="450">
+                <deckExport:DeckExportView x:Name="DeckExportFlyout"/>
+            </controls:Flyout>
             <controls:Flyout x:Name="FlyoutDeckHistory" Header="{lex:Loc MainWindow_Flyout_VersionHistory_Header}" Position="Right" Panel.ZIndex="1" Width="245">
                 <deckHistory:DeckHistoryView x:Name="DeckHistoryFlyout"/>
             </controls:Flyout>
@@ -205,6 +209,7 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <mainWindowControls:MainWindowMenuView x:Name="MainWindowMenu" Grid.Row="1" Grid.ColumnSpan="3"/>
+                    <MenuItem Header="FROM DECK STRING" Click="BtnImportDeckString_Click" />
             <Separator Grid.Row="1" Grid.ColumnSpan="4" Margin="0,29,0,0" Panel.ZIndex="2" />
             <Grid Grid.Column="1" Grid.Row="2" Margin="-1,0,0,0" Width="255">
                 <Grid.RowDefinitions>

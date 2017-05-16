@@ -31,6 +31,7 @@ using Hearthstone_Deck_Tracker.Utility.Updating;
 #endif
 using static System.Windows.Visibility;
 using Application = System.Windows.Application;
+using Clipboard = System.Windows.Clipboard;
 
 #endregion
 
@@ -509,9 +510,8 @@ namespace Hearthstone_Deck_Tracker.Windows
 
 				if(FlyoutDeckScreenshot.IsOpen)
 					DeckScreenshotFlyout.Deck = deck.GetSelectedDeckVersion();
-
-				if(FlyoutNotes.IsOpen)
-					ShowDeckNotesDialog(deck);
+				if(FlyoutDeckExport.IsOpen)
+					DeckExportFlyout.Deck = deck.GetSelectedDeckVersion();
 
 				if(FlyoutDeckHistory.IsOpen)
 				{
@@ -605,6 +605,24 @@ namespace Hearthstone_Deck_Tracker.Windows
 			var deck = DeckPickerList.SelectedDecks.FirstOrDefault()?.GetSelectedDeckVersion() ?? DeckList.Instance.ActiveDeckVersion;
 			if(deck?.ShortId != null)
 				Helper.TryOpenUrl($"https://hsreplay.net/decks/{deck.ShortId}/?utm_source=hdt&utm_medium=client");
+		}
+
+		private void BtnImportDeckString_Click(object sender, RoutedEventArgs e)
+		{
+			try
+			{
+				if(!Clipboard.ContainsText())
+					return;
+				var deck = DeckSerializer.Deserialize(Clipboard.GetText());
+				if(deck == null)
+					;
+				else
+					SaveImportedDeck(deck);
+			}
+			catch(Exception ex)
+			{
+				Log.Error(ex);
+			}
 		}
 	}
 }
